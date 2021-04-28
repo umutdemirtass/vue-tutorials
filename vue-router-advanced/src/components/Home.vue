@@ -1,0 +1,27 @@
+<template>
+    <div>
+        <template v-for="user in users">
+        <user-item :user=user :key="user"></user-item>
+        </template>
+    </div>
+</template>
+
+<script>
+import UserItem from './UserItem';
+export default {
+    name : 'Home',
+    components : {
+        userItem : UserItem
+    },
+    data() {
+        return {
+            users: []
+        }
+    },
+    created(){
+        fetch('https://jsonplaceholder.typicode.com/users')
+        .then((res) => {return res.json()})
+        .then((users) => {this.users = users ;})
+        }
+}
+</script>
